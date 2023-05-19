@@ -5,6 +5,7 @@ public class Fctorial{
   for(int j=1; j<=5; j++){
    i=i*j;
    }
+  System.out.printf("factorial of %d is"+a);
   System.out.println(i);
  }
 }
