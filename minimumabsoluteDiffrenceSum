@@ -5,29 +5,35 @@ public class MinimumAbsuluteSumDiffrence1 {
         System.out.println(sumDiffrence1(num1, num2));
     }
     static int sumDiffrence1(int []num1,int []num2){
-        int mod=(int)1e9+7;
-        long max_diff=0; long sum=0;
-        int index=-1;
-        int num[]=Arrays.copyOf(num1,num1.length);
-        int target=-1;
-        for (int i = 0; i < num2.length; i++) {
-            if((Math.abs(num1[i]-num2[i]))>max_diff){
-                max_diff=Math.abs(num1[i]-num2[i]);
-                index=i;
-                target=num2[i];
+         int mod=(int)1e9+7;
+        int num[]=Arrays.copyOf(num1, num1.length);
+        int diff []=new int[num1.length];
+        int bestdiff[]=new int[num1.length];
+        Arrays.sort(num);
+        for (int i = 0; i < bestdiff.length; i++) {
+            diff[i]=Math.abs(num1[i]-num2[i]);
+            int bs=binarySearchg(num, num2[i]);
+            bestdiff[i]=Math.abs(num2[i]-bs);
+        }
+        int index=0;
+        int max_diff_saved=0;
+        for (int j = 0; j < bestdiff.length; j++) {
+            if(Math.abs(diff[j]-bestdiff[j])>max_diff_saved){
+                max_diff_saved =Math.abs(diff[j]-bestdiff[j]);
+                index=j;
+            }
+
+        }
+        int sum=0;
+        for (int i = 0; i < bestdiff.length; i++) {
+            if(i==index){
+                sum +=bestdiff[i];
+            }
+            else{
+                sum +=diff[i];
             }
         }
-        int bs=binarySearchg(num1, target);
-        if(max_diff==0){
-            return 0;
-        }
-        if(bs != -1){
-            num[index]=bs;
-            for (int i = 0; i < num2.length; i++) {
-                sum =(sum+Math.abs(num[i]-num2[i]))%mod;
-            }
-        }
-        return (int)sum;
+        return sum%mod;
     }
     static int binarySearchg(int [] num1,int target){
         int mid=0;
