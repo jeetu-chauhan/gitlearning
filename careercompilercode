@@ -1,0 +1,33 @@
+package com.CareerCompiler;
+
+import java.util.Scanner;
+
+public class Sum_Ofa_Digit_Divisible {
+    static boolean checkDivisible(int num){
+        if(num%3==0){
+            return true;
+        }
+        return false;
+    }
+     static int sumOfDivisible(int a){
+         int sum=0;
+         if(checkDivisible(a)){
+             sum =sum+a;
+         }
+         return sum;
+     }
+    public static void main(String[] args) {
+        Sum_Ofa_Digit_Divisible sdd=new Sum_Ofa_Digit_Divisible();
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+      //  int sum=0;
+        int i;
+        while(n>0){
+            i=n%10;
+            sumOfDivisible(i);
+            n=n/10;
+        }
+       // System.out.println("Sum of divisible by 3 is "+sum);
+       System.out.println(sumOfDivisible(i))
+    }
+}
